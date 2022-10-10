@@ -1,0 +1,1 @@
+(()=>{"use strict";(e=>{console.log("creando una etiqueta");const n=document.createElement("h1");n.innerText="Hola Fernando",document.body.append(n)})()})();
