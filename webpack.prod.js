@@ -1,12 +1,15 @@
 const HtmlWebPack = require("html-webpack-plugin");
 const MiniCssExtract = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const CssMinimizer = require("css-minimizer-webpack-plugin");
+const Terser = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
 
   output: {
     clean: true,
+    filename: "main.[contenthash].js",
   },
   module: {
     rules: [
@@ -32,7 +35,10 @@ module.exports = {
       },
     ],
   },
-  optimization: {},
+  optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizer(), new Terser()],
+  },
   plugins: [
     new HtmlWebPack({
       title: "Mi WebPack App",
@@ -41,7 +47,7 @@ module.exports = {
     }),
 
     new MiniCssExtract({
-      filename: "[name].css",
+      filename: "[name].[fullhash].css",
       ignoreOrder: false,
     }),
 
